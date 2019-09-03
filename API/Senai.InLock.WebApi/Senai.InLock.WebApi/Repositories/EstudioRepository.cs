@@ -1,4 +1,5 @@
-﻿using Senai.InLock.WebApi.Domains;
+﻿using Microsoft.EntityFrameworkCore;
+using Senai.InLock.WebApi.Domains;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,23 +9,25 @@ namespace Senai.InLock.WebApi.Repositories
 {
     public class EstudioRepository
     {
+        InLockContext ctx = new InLockContext();
+
         public List<Estudios> Listar()
         {
             using (InLockContext ctx = new InLockContext())
-            {              
-                return ctx.Estudios.ToList();
+            {
+                return ctx.Estudios.Include(x => x.Jogos).ToList();
             }
         }
 
         public Estudios BuscarPorId(int id)
-        {      
+        {
             using (InLockContext ctx = new InLockContext())
             {
                 return ctx.Estudios.FirstOrDefault(x => x.EstudioId == id);
             }
         }
 
-        public void Cadastrar (Estudios estudio)
+        public void Cadastrar(Estudios estudio)
         {
             using (InLockContext ctx = new InLockContext())
             {
@@ -54,5 +57,22 @@ namespace Senai.InLock.WebApi.Repositories
                 ctx.SaveChanges();
             }
         }
+
+        public Estudios BuscarPorNome(string Nome)
+        {
+            Estudios estudio = ctx.Estudios.Include(X => X.Jogos).FirstOrDefault(x => x.NomeEstudio == Nome);
+            //ctx.Estudios.Include(X => X.Jogos);
+
+            return estudio;
+        }
+
+        //public Estudios BuscarPorPais(string pais)
+        //{
+         //   Estudios estudios = ctx.Estudios.FirstOrDefault(x => x.PaisOrigem == pais);
+            //ctx.Estudios.ToList(estudios);
+            //return ctx.Estudios.FromSql("Select NomeEstudio from Estudios where PaisOrigem = ");
+            //return ctx.Estudios.Find(pais);
+        //    return estudio;
+        //}
     }
 }

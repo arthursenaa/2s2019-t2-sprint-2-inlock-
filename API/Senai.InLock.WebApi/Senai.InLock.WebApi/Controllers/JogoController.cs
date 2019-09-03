@@ -66,5 +66,27 @@ namespace Senai.InLock.WebApi.Controllers
             JogoRepository.Deletar(Id);
             return Ok();
         }
+
+        //Extras
+
+        [HttpGet("5jogos")]
+        public IActionResult ListarTop5()
+        {
+            return Ok(JogoRepository.ListaTop5());
+        }
+
+        [HttpGet("data")]
+        public IActionResult ListaPorData()
+        {
+            return Ok(JogoRepository.ListaPorData());
+        }
+
+        [HttpGet("{nome}")]
+        public IActionResult BuscarJogoPorNome(string Nome)
+        {
+            return Ok(JogoRepository.BuscarPorNome(Nome));
+        }
+
+        
     }
 }

@@ -69,5 +69,20 @@ namespace Senai.InLock.WebApi.Controllers
             EstudioRepository.Deletar(id);
             return Ok();
         }
+
+        // Extra
+
+        [HttpGet("{nome}")]
+        public IActionResult BuscarEstudioPorNome(string Nome)
+        {
+            return Ok(EstudioRepository.BuscarPorNome(Nome));
+        }
+        
+        //[HttpGet("pais/{pais}")]
+        //public IActionResult BuscarEstudioPorPais(string pais)
+        //{
+            
+        //    return Ok(EstudioRepository.BuscarPorPais(pais));
+        //}
     }
 }

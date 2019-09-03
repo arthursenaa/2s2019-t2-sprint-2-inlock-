@@ -52,3 +52,18 @@ from Estudios Where  EstudioId = @EstudioId
 end
 
 exec BuscarEstudioId  1
+
+
+go --Top(5) para inserir uma quantidade
+create procedure JogosCaros
+as begin
+Select Top(5) * from Jogos order by Valor desc
+end
+
+drop procedure JogosCaros
+
+exec JogosCaros
+
+SELECT * from Estudios
+
+select * from Estudios where PaisOrigem = @Nome
