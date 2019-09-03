@@ -30,7 +30,7 @@ namespace Senai.InLock.WebApi
                 c.SwaggerDoc("v1",
                 new Swashbuckle.AspNetCore.Swagger.Info
                 {
-                    Title = "Inlock API",
+                    Title = "InLock API",
                     Version = "v1"
                 });
             });
@@ -52,9 +52,9 @@ namespace Senai.InLock.WebApi
 
                     ClockSkew = TimeSpan.FromMinutes(30),
 
-                    ValidIssuer = "Inlock.WebApi",
+                    ValidIssuer = "InLock.WebApi",
 
-                    ValidAudience = "Inlock.WebApi"
+                    ValidAudience = "InLock.WebApi"
                 };
             });
         }
@@ -72,7 +72,7 @@ namespace Senai.InLock.WebApi
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Inlock API V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "InLock API V1");
             });
         }
     }

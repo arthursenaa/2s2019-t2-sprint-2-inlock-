@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Senai.InLock.WebApi.Domains;
 using Senai.InLock.WebApi.Repositories;
@@ -16,12 +17,14 @@ namespace Senai.InLock.WebApi.Controllers
     {
         JogoRepository JogoRepository = new JogoRepository();
 
+        [Authorize]
         [HttpGet]
         public IActionResult ListarJogos()
         {
             return Ok(JogoRepository.Listar());
         }
 
+        [Authorize(Roles = "ADMINISTRADOR")]
         [HttpPost]
         public IActionResult CadastrarJogo(Jogos jogos)
         {
@@ -37,6 +40,7 @@ namespace Senai.InLock.WebApi.Controllers
             }
         }
 
+        [Authorize(Roles = "ADMINISTRADOR")]
         [HttpPut]
         public IActionResult AtualizarJogos(Jogos jogos)
         {
@@ -55,6 +59,7 @@ namespace Senai.InLock.WebApi.Controllers
             }
         }
 
+        [Authorize(Roles = "ADMINISTRADOR")]
         [HttpDelete("{id}")]
         public IActionResult DeletarJogos(int Id)
         {

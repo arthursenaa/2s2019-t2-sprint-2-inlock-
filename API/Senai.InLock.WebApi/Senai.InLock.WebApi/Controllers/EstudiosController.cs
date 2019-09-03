@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Senai.InLock.WebApi.Domains;
@@ -16,12 +17,14 @@ namespace Senai.InLock.WebApi.Controllers
     {
         EstudioRepository EstudioRepository = new EstudioRepository();
 
+        [Authorize]
         [HttpGet]
         public IActionResult ListarEstudios()
         {
             return Ok(EstudioRepository.Listar());
         }
 
+        [Authorize (Roles = "ADMINISTRADOR")]
         [HttpPost]
         public IActionResult CadastrarEstudio(Estudios estudio)
         {
@@ -37,6 +40,7 @@ namespace Senai.InLock.WebApi.Controllers
             }
         }
 
+        [Authorize(Roles = "ADMINISTRADOR")]
         [HttpPut]
         public IActionResult AtualizarEstudio(Estudios estudio)
         {
@@ -58,6 +62,7 @@ namespace Senai.InLock.WebApi.Controllers
             }
         }
 
+        [Authorize(Roles = "ADMINISTRADOR")]
         [HttpDelete("{id}")]
         public IActionResult DeletarEstudio(int id)
         {
